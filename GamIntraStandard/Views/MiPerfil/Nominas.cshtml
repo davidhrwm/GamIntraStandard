@@ -1,0 +1,84 @@
+﻿@model List<GamIntraStandard.Common.MisCursos>
+@{ 
+
+    var ob = new GamIntraStandard.Clases.CMiPerfil(); //ALEX o JORDI esto que es?
+    var file = ob.Nomina(DateTime.Now.Year.ToString());//"2018");
+
+    var dirs = ob.GetDirectorio();
+
+}
+<script>
+    $(document).ready(function () {
+
+        $("#year").change(function () {
+
+            $.ajax({
+                type: 'POST',
+                url: "@Url.Action("GetYearFile", "MiPerfil")",
+                data: { yr: $(this).val() },
+                success: function (data) {
+                    console.log(data);
+                    $("#aqui").html(data);
+
+                },
+            });
+
+            $("#year").val($("#year option:selected").val());
+        });
+
+    });
+
+</script>
+
+<div class="jornada-turno-master">
+    <div class="container" data-pg-collapsed>
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <div class="perfil-info-titulo text-center text-uppercase">
+                    <p>Nominas</p>
+                </div>
+                <div class="perfil-info-contenido">
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-2">
+                            <label for="year">Año</label>
+                            <select id="year" class="form-control">
+                                @{
+                                    foreach (var dir in dirs)
+                                    {
+                                        if (dir.DirName == DateTime.Now.Year.ToString())
+                                        {
+                                            <option selected>@dir.DirName</option>
+                                        }
+                                        else
+                                        {
+                                            <option>@dir.DirName</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="containerNominas">
+
+                            <!--<span class=" col-sm-offset-1  col-md-offset-1 col-lg-offset-1">Descargar en PDF</span>-->
+                            <!--col-xs-12 col-sm-12 col-md-12 col-lg-offset-1-->
+                            <ul id="aqui" class="row">
+                                @{
+                                        foreach (var item in file)
+                                        {
+                                            var url = Url.Action("DownloadNomina", "MiPerfil", new { @carpeta = item.FilePath, @name = item.FileName, @id = item.id, @year = DateTime.Now.Year });
+
+                                            <li class="archivoLista"><a href="@url"><span class="titleFile">@item.FileName.Split('.').First()</span><br /><span class="biggerIcons glyphicon glyphicon-file"></span></a></li>
+                                            @*<li class="archivoLista"><a href="/MiPerfil/DownloadFile/?url=@item.FilePath@item.FileName&name=@item.FileName"><span class="titleFile">@item.FileName.Split('.').First()</span><br /><span class="biggerIcons glyphicon glyphicon-file"></span></a></li>*@
+                                        }
+                                }
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

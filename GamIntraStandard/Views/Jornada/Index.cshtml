@@ -1,0 +1,123 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@using GamIntraCustomerVerification
+
+
+@{
+    Clients items = new Clients();
+    int ClientCode;
+
+}
+
+
+<script>
+
+    $(document).ready(function () {
+       
+        $.ajax({
+            type: 'POST',
+            url: "@Url.Action("CalendarioLaboral", "Jornada")",
+            success: function (data) {
+
+                $(".jornada-render").html(data);
+            }
+        });
+
+        $("#btn-jornada-calendario").click(function (e) {
+
+            e.preventDefault();
+
+            $.ajax({
+                type: 'POST',
+                url: "@Url.Action("CalendarioLaboral", "Jornada")",
+                success: function (data) {
+
+                    $(".jornada-render").html(data);
+                }
+            });
+        });
+
+
+        $("#btn-jornada-turno").click(function (e) {
+
+            e.preventDefault();
+
+            $.ajax({
+                type: 'POST',
+                url: "@Url.Action("CambioTurno", "Jornada")",
+                success: function (data) {
+
+                    $(".jornada-render").html(data);
+                }
+            });
+        });
+
+        $("#btn-jornada-extras").click(function (e) {
+
+            e.preventDefault();
+
+            $.ajax({
+                type: 'POST',
+                url: "@Url.Action("HorasExtras", "Jornada")",
+                success: function (data) {
+
+                    $(".jornada-render").html(data);
+                }
+        });
+    });
+
+    });
+
+</script>
+
+<div class="jornada-master">
+    <div class="container-fluid jornada-master-botonera">
+        <div class="row">
+            <div id="nav1" class="col-md-12 col-lg-12">
+                <ul class="nav navbar-nav jornada-nav">
+
+
+                    @{
+                        GamIntraCustomerVerification.Module.Verification info = null;
+                        using (var ent = new GamIntraStandard.Models.gamEntities1())
+                        {
+                            var cliente = ent.CFG.Select(x => x.CLIENT_OSOFT).FirstOrDefault();
+
+                            ClientCode = cliente == null ? 0 : Convert.ToInt32(cliente);
+
+                            var _v = new GamIntraCustomerVerification.Clients();
+
+                            info = _v.MainVerification(ClientCode);
+
+                            if (info.SubJornadaCalendarioLaboral == true)
+                            {
+                                <li id="btn-jornada-calendario">
+                                    <a href="#">Calendario laboral</a>
+                                </li>
+                            }
+                            if (info.SubJornadaCambioTurno == true)
+                            {
+                                <li id="btn-jornada-turno">
+                                    <a href="#">Cambio de turno</a>
+                                </li>
+                            }
+                            if (info.SubJornadaHorasExtras == true)
+                            {
+                                <li id="btn-jornada-extras">
+                                    <a href="#">Horas extras</a>
+                                </li>
+                            }
+
+                        }
+                    }    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="jornada-render">
+
+
+
+    </div>
+</div>

@@ -1,0 +1,41 @@
+﻿@model List<GamIntraStandard.Common.MisCursos>
+@{
+
+    var ob = new GamIntraStandard.Clases.CMiPerfil();
+
+    var file = ob.DocumentosPersonales();
+
+}
+<div class="jornada-turno-master">
+    <div class="container" data-pg-collapsed>
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <div class="perfil-info-titulo text-center text-uppercase">
+                    <p>Documentos Personales</p>
+                </div>
+                <div class="perfil-info-contenido">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <span>Documentos personales en PDF</span>
+
+                            <ul id="aqui">
+                                @{
+                                    foreach (var item in file)
+                                    {
+                                        var url = Url.Action("DownloadFile2", "MiPerfil", new { @carpeta = item.FilePath, @name = item.FileName, @id = item.id });
+                                        ///MiPerfil/DownloadFile/?url=@item.FilePath@item.FileName&name=@item.FileName
+                                        <li class="archivoLista"><a href="@url"><span class="titleFile">@item.FileName.Split('.').First()</span><br /><span class="biggerIcons glyphicon glyphicon-file"></span></a></li>
+                                        @*<li class="archivoLista"><a href="/MiPerfil/DownloadFile/?url=@item.FilePath@item.FileName&name=@item.FileName"><span class="titleFile">@item.FileName.Split('.').First()</span><br /><span class="biggerIcons glyphicon glyphicon-file"></span></a></li>*@
+                                    }
+                                }
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

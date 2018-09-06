@@ -1,0 +1,120 @@
+﻿
+@{
+    ViewBag.Title = "MisDocumentos";
+}
+
+@using GamIntraCustomerVerification
+
+
+@{
+    Clients items = new Clients();
+    int ClientCode;
+
+}
+
+<script>
+    $(document).ready(function () {
+
+        var fecha = new Date();
+
+
+        $.ajax({
+            type: 'POST',
+            url: "@Url.Action("Nominas", "MiPerfil")",
+            data: { date: fecha.getFullYear() },
+            success: function (data) {
+                $(".formacion-render").html(data);
+            },
+        });
+
+        $("#nomina").click(function () {
+
+             $.ajax({
+                type: 'POST',
+                url: "@Url.Action("Nominas", "MiPerfil")",
+                success: function (data) {
+                    $(".formacion-render").html(data);
+                },
+            });
+
+
+        });
+
+        $("#misd").click(function () {
+
+             $.ajax({
+                type: 'POST',
+                url: "@Url.Action("DatosPersonales", "MiPerfil")",
+                success: function (data) {
+                   //$(".formacion-render").html("<embed src='/MiPerfil/Modelo145' width='500' height='375'>");
+                   $(".formacion-render").html(data);
+
+                },
+            });
+
+
+        });
+
+
+    });
+
+
+</script>
+
+<div class="jornada-master">
+    <div class="container-fluid jornada-master-botonera">
+        <div class="row">
+            <div id="nav1" class="col-md-12 col-lg-12">
+                <ul class="nav navbar-nav jornada-nav">
+                    @{/*
+GamIntraCustomerVerification.Module.Verification info = null;
+using (var ent = new GamIntraStandard.Models.gamEntities1())
+{
+var cliente = ent.CFG.Select(x => x.CLIENT_OSOFT).FirstOrDefault();
+
+ClientCode = cliente == null ? 0 : Convert.ToInt32(cliente);
+
+var _v = new GamIntraCustomerVerification.Clients();
+
+info = _v.MainVerification(ClientCode);
+
+if (info.SubFormacionMisCursos == true)
+{
+<li id="btn-jornada-calendario">
+<a id="cursos" href="#">Mis Cursos</a>
+</li>
+}
+if (info.SubFormacionProximosCursos == true)
+{
+<li id="btn-jornada-calendario">
+<a id="prox" href="#">Próximos Cursos</a>
+</li>
+}
+
+}*/
+                    }
+
+                    <li id="btn-jornada-calendario">
+                        <a id="misd" href="#">Datos Personales</a>
+                    </li>
+                    <li id="btn-jornada-calendario">
+                        <a id="nomina" href="#">Nominas</a>
+                    </li>
+                    <li id="btn-jornada-calendario">
+                        @{
+
+                            var url = Url.Action("Modelo145", "MiPerfil", new { });
+
+                            <a href="@url">Modelo 145 IRPF</a>
+                        }
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top:10px" class="formacion-render nominasModul">
+    </div>
+</div>
+
+
+

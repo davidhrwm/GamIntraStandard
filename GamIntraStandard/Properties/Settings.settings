@@ -1,0 +1,33 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="GamIntraStandard.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="from" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">automaticsend@original-soft.com</Value>
+    </Setting>
+    <Setting Name="serverIP" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">127.0.0.1</Value>
+    </Setting>
+    <Setting Name="password" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Automaticsend2010</Value>
+    </Setting>
+    <Setting Name="host" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">mail.original-soft.com</Value>
+    </Setting>
+    <Setting Name="version" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">20171201</Value>
+    </Setting>
+    <Setting Name="ruta" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:/gam/</Value>
+    </Setting>
+    <Setting Name="port" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">25</Value>
+    </Setting>
+    <Setting Name="emailCntrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">david.hernandez@original-soft.com</Value>
+    </Setting>
+    <Setting Name="url" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://81.45.93.79/GamIntra</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

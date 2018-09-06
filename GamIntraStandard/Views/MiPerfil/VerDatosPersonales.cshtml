@@ -1,0 +1,137 @@
+﻿@model GamIntraStandard.Models.TRB
+
+@{
+    ViewBag.Title = "v2017.2.14.2A VerDatosPersonales";
+}
+
+  <!-- Version view 2017.2.14.2A -->
+
+<script>
+
+    $(document).ready(function () {
+
+
+        $("#personalData").click(function () {
+            if ($("#personalDataIn").val().trim() != "") {
+
+                $("#myModal").modal('show');
+                $("#valueToSend").html();
+                $("#valueToSend").html($("#personalDataIn").val());
+
+            }
+        });
+
+
+        $("#sendDatos").click(function () {
+
+
+            $.ajax({
+                url: "@Url.Action("CambioDatosPersonales","MiPerfil")",
+                data: { text: $("#personalDataIn").val() },
+                success: function () {
+
+                    alert("Enviado correctamente");
+
+                },
+                error: function () {
+
+                    alert("Ha ocurrido un error");
+                }
+            });
+
+        });
+
+    });
+
+
+</script>
+
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Petición Cambio de Datos</h4>
+            </div>
+            <div class="modal-body">
+                <p>¿Desea enviar esta petición de cambio de datos?</p><br/>
+                <p id="valueToSend"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                <button id="sendDatos" type="button" class="btn btn-default" data-dismiss="modal">Confirmar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+<div class="perfil-master">
+    <div class="container" data-pg-collapsed>
+        <div class="row">
+            <div class="col-md-10">
+                <input id="personalDataIn" type="text" class="form-control" placeholder="¿Hay algún dato que quieras cambiar?">
+            </div>
+            <div class="col-md-2">
+                <button id="personalData" type="button" class="btn btn-default">Enviar</button>
+            </div>
+        </div>
+    </div>
+    <div class="perfil-info container">
+        <div class="row">
+            <div class="col-md-5" data-pg-collapsed>
+                <div class="perfil-info-titulo text-center text-uppercase">
+                    <p>Datos personales</p>
+                </div>
+                <div class="perfil-info-contenido">
+                    <img src="~/assets/img/profile.gif" height="75" width="75" class="center-block" />
+                    <p class="text-left"><i class="material-icons">person</i><span class="test1">@Model.NOM</span></p>
+                    <p class="text-left"><i class="material-icons">home</i><span class="test1">@Model.DIR</span></p>
+                    <p class="text-left"><i class="material-icons">smartphone</i><span class="test1">@Model.TEL_3 </span></p>
+                    <p class="text-left"><i class="material-icons">phone</i><span class="test1">@Model.TEL_1</span></p>
+                    <p class="text-left"><i class="material-icons">cake</i><span class="test1">@( Model.DATA_NEIX == null ? "Sin Datos" : Model.DATA_NEIX.Value.Date.ToString("dd/MM/yyyy"))</span></p>
+                </div>
+            </div>
+            <div class="col-md-4" data-pg-collapsed>
+                <div class="perfil-info-titulo text-center text-uppercase">
+                    <p>Contrato</p>
+                </div>
+                <div class="perfil-info-contenido">
+                    <p class="text-left"><i class="material-icons">perm_contact_calendar</i>Antiguedad: @Model.DATA_ANTI</p>
+                    <p class="text-left"><i class="material-icons">star</i>categoria: @Model.CODI_CAT </p>
+                    <p class="text-left"><i class="material-icons">import_contacts</i>Contrato: @Model.CONTRATO</p>
+                    <p class="text-left"><i class="material-icons">euro_symbol</i>IBAN / CC: @Model.IBAN / @Model.CC</p> @*CUENTA BANCARIA*@
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3" data-pg-collapsed>
+                    <div class="perfil-info-titulo text-center text-uppercase">
+                        <p>Info</p>
+                    </div>
+                    <div class="perfil-info-contenido perfil-info-contenido-mini">
+                        <p class="text-left"><i class="material-icons">security</i>NASS: @( string.IsNullOrWhiteSpace(Model.NASS) ? "Sin Datos" : Model.NASS)</p>
+                        <p class="text-left"><i class="material-icons">credit_card</i>Dni: @Model.DNI </p>
+                    </div>
+                    <div class="perfil-info-sub">
+                        <div class="perfil-info-titulo text-center text-uppercase">
+                            <p>Otros</p>
+                        </div>
+                        <div class="perfil-info-contenido perfil-info-contenido-mini">
+                            <p class="text-left"><i class="material-icons">directions_walk</i>E.Civil: @Model.ESTAT_CIVIL</p>
+                            <p class="text-left"><i class="material-icons">wc</i>Pareja: @Model.NOM_PARELLA</p>
+                            <p class="text-left"><i class="material-icons">credit_card</i>DNI Pareja: @Model.DNI_PARELLA</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

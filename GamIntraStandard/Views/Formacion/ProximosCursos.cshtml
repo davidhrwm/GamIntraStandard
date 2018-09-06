@@ -1,0 +1,121 @@
+﻿<script>
+
+    $(document).ready(function () {
+
+         $('#calendar').fullCalendar({
+              editable: false,
+              eventLimit: true,
+              monthNames: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
+              monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+              firstDay: 1,
+              dayNames: [ 'Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+              dayNamesShort: ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],
+              buttonText: { today: 'Hoy', month: 'mes', week: 'semana', day: 'día' },
+              eventClick: function (calEvent, jsEvent, view) {
+
+
+                  /*Este ajax sirve para clickar en el día con curso y se abre el modal con la info*/
+                 $.ajax({
+                      type:'POST',
+                      url: "@Url.Action("InfoCurso", "Formacion")",
+                      data: { cursoId: calEvent.id },
+                      success: function (data) {
+                          console.log(data);
+                          //Switch para saber el tipo de formación y mostrarlo como informacion adicional
+                          switch (data.FORMACIO) {
+                              case "FSR":
+                                  var formacion = "Formación Reglada.";
+                                  break;
+                              case "FNR":
+                                  var formacion = "Formación No Reglada.";
+                                  break;
+                              case "ACR":
+                                  var formacion = "Acreditación Profesional.";
+                                  break;
+                          }
+
+                          //Parsear la data del JSON a una data entendible
+                          var dataInici = ParseData(data.DATA_INICI); 
+                          var dataFinal = ParseData(data.DATA_FINAL);
+                          alert("adios1");
+                          $(".modal-header").html("<strong>Formación: </strong>" + data.TITOL);
+                          $(".containerText").html("<p><strong>Se imparte en: </strong>" + data.LLOC + "</p><br/><p><strong>Formador: </strong>" + data.FORMADOR + ".</p><br/><p><strong>Tipo de formación:</strong> " + formacion + "</p><br/><p><strong>Fecha Inicio:</strong> " + dataInici + "<br/>  <strong>Fecha Final:</strong> " + dataFinal + " </p><br/><p><strong>Número de Horas: </strong>" + data.HORES + "</p><br/><p><strong>Observaciones:</strong> " + data.OBS + ".</p><br/><p><strong>Link Documentación:</strong> <a href='" + data.PATH_DOC + "'  target='_blank'>" + data.PATH_DOC + "</a></p>");
+                          $("#myModal").modal('toggle');
+                            
+                      },
+                    });
+              },
+        });
+
+         $.ajax({
+             type: "GET",
+             url: "@Url.Action("GetAllCursos","Formacion")",
+             success: function (data) {
+
+                 for (var i = 0; i < data.length; i++) {
+
+                     dataInici = new Date(parseInt(data[i].DATA_INICI.substr(6)));
+                     dataFinal = new Date(parseInt(data[i].DATA_FINAL.substr(6)));
+
+                     //Se corrige la fecha sumandole un día para salir correctamente en el calendario.
+                     dataFinal.setDate(dataFinal.getDate() + 1);
+
+                     //var event = { id: data[i].CODI_FOR, title: data[i].TITOL, allDay: true, start: new Date(parseInt(data[i].DATA_INICI.substr(6))), end: new Date(parseInt(data[i].DATA_FINAL.substr(6))), color: "cyan", textColor: "black" };
+                     var event = { id: data[i].CODI_FOR, title: data[i].TITOL, allDay: true, start: dataInici, end: dataFinal, color: "yellow", textColor: "black", borderColor: "grey" };
+                     $("#calendar").fullCalendar('renderEvent', event, true);
+                     console.log(event);
+                     //It is the moment immediately after the event has ended. For example, if the last full day of an event is Thursday, the exclusive end of the event will be 00:00:00 on Friday!
+                 }
+
+             },
+         });
+
+    });
+
+    function ParseData(data) {
+        //Parsea las fechas para que se vea todos los detalles sobre una fecha
+        //var data = new Date(parseInt(data.substr(6)));
+
+        //Aquí parsea solo para mostrar el día mes y año que empieza o acaba una formacion
+        var data = new Date(parseInt(data.replace(/(^.*\()|([+-].*$)/g, '')));
+        var data = + data.getDate() + "/" + (data.getMonth() + 1) + "/" + data.getFullYear();
+        return data;
+    }
+    
+</script>
+
+<style>
+    .fc-unthemed .fc-today {
+        border:3px solid red;
+    }
+</style>
+
+
+
+<div class="jornada-calendar-master">
+   
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-offsset-4 col-md-8 col-lg-8 col-sm-12 col-xs-12 center-block" id="calendar">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="titulo"></h4>
+            </div>
+            <div id="cuerpo" class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

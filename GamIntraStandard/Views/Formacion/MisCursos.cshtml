@@ -1,0 +1,149 @@
+﻿@model List<GamIntraStandard.Common.MisCursos>
+
+
+<script>
+
+    $("#year").change(function () {
+
+        var year = $("#year>option").map(function () { return $(this).val(); });
+        var yearSelected = $("#year option:selected").val();
+
+        $.ajax({
+            type: 'POST',
+            global: false,
+            url: "@Url.Action("MisCursos", "Formacion")",
+                data: { date: $(this).val(), year: $("#year").val()},
+                success: function (data) {
+                    $(".formacion-render").html(data); //RENDERA EL FRONTEND
+
+                    $("#year").html("");
+                    for (var i = 0; i < year.length; i++) {
+                        if (year[i] == yearSelected) { //LO VUELVE A RELLENAR CON LOS DATOS ANTERIORES Y CON LA OPCIÓN SELECCIONADA QUE ELIGIÓ
+                            $("#year").append("<option selected>" + yearSelected + "</option>");
+                        } else {
+                            $("#year").append("<option>" + year[i] + "</option>");
+                        }
+                    } 
+                },
+        });
+        
+
+    });
+
+
+
+</script>
+
+<div class="jornada-turno-master">
+    <div class="container" data-pg-collapsed>
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <div class="perfil-info-titulo text-center text-uppercase">
+                    <p>Mis Cursos</p>
+                </div>   
+                <div class="perfil-info-contenido">
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-2">
+                            <label for="year">Año</label>
+                           <select id="year" class="form-control" >
+                              @{
+                                  for (var i = 2010; i <= DateTime.Now.Year; i++)
+                                  {
+                                      @*if (Model.Count == 0)
+                                      {
+                                        <option>@i</option>
+                                      }
+                                      else
+                                      {*@
+                                          if (i == DateTime.Now.Year)
+                                          {
+                                            <option selected="selected">@i</option>
+                                          }
+                                          else
+                                          {
+                                            <option>@i</option>
+                                          }
+                                      }
+                                  }
+
+                                  @*for (var i = 2010; i <= DateTime.Now.Year; i++)
+                                  {
+                                      if (Model.Count == 0)
+                                      {
+                                        <option>@i</option>
+                                      }
+                                      else
+                                      {
+                                          if (i == Model.First().Final.Value.Year)
+                                          {
+                                            <option selected="selected">@i</option>
+                                          }
+                                          else
+                                          {
+                                                <option>@i</option>
+                                          }
+                                      }
+                                   }
+                                }*@
+                           </select>
+                        </div>
+                        <div class="col-md-9">                           
+                               
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>                                           
+                                                <th>Fecha Inicio</th>
+                                                <th>Fecha Final</th>
+                                                <th>Titulo</th>
+                                                <th>Horas</th>                                               
+                                            </tr>
+                                        </thead>
+                                        
+                                        <tbody>
+                                            @{     
+                                                if (Model != null)
+                                                {
+                                                    foreach (var item in @Model)
+                                                    {
+                                                    <tr>
+                                                        <td>@item.Inicio.Value.Date.ToString("dd/MM/yyyy")</td>
+                                                        <td>@item.Final.Value.Date.ToString("dd/MM/yyyy")</td>
+                                                        <td>@item.Titulo</td>
+                                                        <td>@item.Horas</td>
+                                                    </tr>                                                  
+                                                    }
+                                                }
+                                              }
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>Total Horas: @{
+                                                    if(Model != null)
+                                                    {
+                                                        @Model.Sum(x => x.Horas)
+                                                    }
+                                                    else
+                                                    {
+                                                       
+                                                    }
+                                                } </td>                                            
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+</script>

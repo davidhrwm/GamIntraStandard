@@ -1,0 +1,308 @@
+﻿@model List<GamIntraStandard.Models.INF_TRB>
+@{
+    ViewBag.Title = "Home Page";
+    //Response.ContentType = "application/javascript";
+    var home = new GamIntraStandard.Clases.CHome();
+    var msg = home.GetBuzon();
+
+
+    var users = home.GetAllUsers();
+}
+
+<script>
+
+    $(document).ready(function () {
+        $("#btnEnviarMsg").click(function () {
+
+            $.ajax({
+                type: 'POST',
+                url: "@Url.Action("EnviarMensaje", "Home")",
+                data: {
+                    asunto: $("#inAsunto").val(),
+                    mensaje: $("#inMsg").val(),
+                    /*codiTrb: $("#inCodi").val()*/
+                    codiTrb: $("#us").val()
+                },
+                success: function (data) {
+                    $(".modal-header").html("Mensaje Enviado."); //Añade el contenido al headerModal
+                    $(".containerText").html("El mensaje ha sido enviado correctamente."); //Añade contenido al cuerpo del Modal
+                    $("#myModal").modal("toggle"); //Muestra el modal
+                    $("#inAsunto").val(""); //El valor cambia
+                    $("#inMsg").val("");
+                    /*$("#inCodi").val("");*/
+                  }
+              });
+
+        });
+
+        $("#btnEnviarMsgAdmin").click(function () {
+
+            $.ajax({
+                type:'POST',
+                url: "@Url.Action("CambiarDatos", "Home")",
+                data: {
+                    asunto: $("#inAsuntoAdmin").val(),
+                    mensaje: $("#inMsgAdmin").val(),
+                    codiTrb:"Administracion"
+                },
+                success: function (data) {
+                    $(".modal-header").html("Mensaje Enviado."); //Añade el contenido al headerModal
+                    $(".containerText").html("El mensaje ha sido enviado correctamente a la Administración."); //Añade contenido al cuerpo del Modal
+                    $("#myModal").modal("toggle"); //Muestra el modal
+                    $("#inAsuntoAdmin").val("");
+                    $("#inMsgAdmin").val("");
+                    $("#inCodiAdmin").val("");
+                  }
+              });
+
+        });
+
+        $(".btnVisto").click(function () {
+
+            $(".modal-header").html("");
+            $(".containerText").html("");
+            $(".modal-footer").html("");
+
+            $.ajax({
+                type:'POST',
+                url: "@Url.Action("MarcarLeido", "Home")",
+                data: {
+                    msg: $(this).attr("info"),
+                },
+                success: function (data) {
+                    /*LA DATA CREO QUE NO LLEGA CORRECTAMENTE*/
+                    $(".modal-header").html("Mensaje Visto."); //Añade el contenido al headerModal
+                    $(".containerText").html("El mensaje seleccionado ha sido leido y se borrará."); //Añade contenido al cuerpo del Modal
+                    $(".modal-footer").html("<button type='button' class='btn btn-default' data-dismiss='modal'>Cerrar</button>");
+                    $("#myModal").modal("toggle"); //Muestra el modal
+                }
+              });
+
+        });
+
+    });
+
+
+</script>
+<style>
+
+   .nav.gmail > li > a {
+        text-align: center;
+        position: relative;
+        top: 50%;
+        -ms-transform: translateY(0%);
+        -webkit-transform: translateY(0%);
+        transform: translateY(0%);
+    }
+
+</style>
+ <div>
+     @{ 
+
+         var data = DateTime.Now;
+       
+     }
+    <p class="v">Versión view: 2017.3.7.1A</p>
+    <div class="container-fluid home-agenda">
+        <div class="home-agenda-btnatras hidden-sm hidden-xs">
+            <i class="material-icons">chevron_left</i>
+        </div>
+        <div class="home-agenda-btndelate hidden-sm hidden-xs">
+            <i class="material-icons">chevron_right</i>
+        </div>
+        <div class="row home-agenda-animate">
+            <div class="col-md-3 col-lg-3 hidden-xs hidden-sm">
+                <p class="text-center">@System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(data.AddDays(-3).Month) @data.AddDays(-3).Year</p>
+                <p style="" class="text-center">@data.AddDays(-3).Day</p>
+                <p>Avisos<br></p>
+                <div class="home-agenda-center">
+                    <div class="mensaje">
+                        <i class="material-icons">mail_outline</i>
+                        <p style="" class="text-left">Sin avisos</p>
+                    </div>
+                </div>
+                <div class="mensaje">
+                    <i class="material-icons">expand_more</i>
+                    <p style="">Mostrar todos</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 hidden-sm hidden-xs">
+                <p class="text-center">@System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(data.AddDays(-2).Month) @data.AddDays(-2).Year</p>
+                <p style="" class="text-center">@data.AddDays(-2).Day</p>
+                <p>Avisos<br></p>
+                <div class="home-agenda-center">
+                    <div class="mensaje">
+                        <i class="material-icons">mail_outline</i>
+                        <p style="" class="text-left">Sin avisos</p>
+                    </div>
+                </div>
+                <div class="mensaje">
+                    <i class="material-icons">expand_more</i>
+                    <p style="">Mostrar todos</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 hidden-xs col-sm-6">
+                <p class="text-center">@System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(data.AddDays(-1).Month) @data.AddDays(-1).Year</p>
+                <p style="" class="text-center">@data.AddDays(-1).Day</p>
+                <p>Avisos<br></p>
+                <div class="home-agenda-center">
+                    <div class="mensaje">
+                        <i class="material-icons">mail_outline</i>
+                        <p style="" class="text-left">Sin avisos</p>
+                    </div>
+                </div>
+                <div class="mensaje">
+                    <i class="material-icons">expand_more</i>
+                    <p style="">Mostrar todos</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-6">
+                <p class="text-left">@System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(data.Month) @data.Year</p>
+                <p style="" class="text-left">@data.Day</p>
+                <p>Avisos<br></p>
+                <div class="home-agenda-center">
+                    <div class="mensaje">
+                        <i class="material-icons">mail_outline</i>
+                        <p style="" class="text-left">Sin avisos</p>
+                    </div>
+                </div>
+                <div class="mensaje">
+                    <i class="material-icons">expand_more</i>
+                    <p style="">Mostrar todos</p>
+                </div>
+                <div class="home-hoy">
+                    <p>Barcelona</p>
+                    <img src="~/assets/img/meteo/sun-and-cloud.svg" alt="" width="50" height="60">
+                    <p>25ºC</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="container">
+            <hr />
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs gmail">
+                        <li class="active">
+                            <a href="#home" data-toggle="tab"><span class="glyphicon glyphicon-inbox"></span>Buzón entrada</a>
+                        </li>
+                        <li>
+                            <a href="#profile" data-toggle="tab">
+                                <span class="glyphicon glyphicon glyphicon-pencil"></span>
+                                Enviar mensaje
+                            </a>
+                        </li>
+                        <!---<li>
+                            <a href="#messages" data-toggle="tab">
+                                <span class="glyphicon glyphicon glyphicon-info-sign"></span>
+                                Alertas
+                            </a>
+                        </li>-->
+                        <li>
+                            <a href="#settings" data-toggle="tab">
+                                <span class="glyphicon glyphicon glyphicon-briefcase"></span>
+                                Enviar a administracion
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="home">
+                            <div class="list-group">
+                                @{            
+                                    foreach (GamIntraStandard.Models.INF_TRB item in msg)
+                                    {
+                                        <a href="#" class="list-group-item">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox">
+                                                </label>
+                                            </div>
+                                            <span class="glyphicon glyphicon-envelope"></span>
+                                            @item.CODI_TRB_ORIGEN
+                                            <span>@item.DES - </span>
+                                            <span class="text-muted" style="font-size: 11px;">@item.TEXTE<br></span>
+                                            <span class="badge">@item.DATA.Value.Day - @item.DATA.Value.Month - @item.DATA.Value.Year | @item.DATA.Value.ToString("HH:mm", System.Globalization.CultureInfo.InvariantCulture)</span>
+                                            <span class="pull-right"><span class="glyphicon glyphicon-eye-open btnVisto" info="@item.SYS_215"></span></span>
+                                            
+                                            <!--<input style="display:none" type="text" class="form-control msgSys" value="@item.SYS_215">-->
+                                        </a>
+                                    }
+                                    }
+                            </div>
+                        </div>
+
+                        <!-- Modal -->
+                        <!--<div id="myModal" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 id="headerModal" class="modal-title">Mensaje enviado</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p id="contentModal"></p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>-->
+
+                        <div class="tab-pane fade in" id="profile">
+                            <div class="list-group">
+                                <div class="list-group-item">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">@@</span>
+                                        <!--<input id="inCodi" type="text" class="form-control" placeholder="Destinatario" list="us">-->
+                                        <select id="us" required>
+                                            @{
+                                                foreach (GamIntraStandard.Models.TRB item in users)
+                                                {
+                                                  <option value="@item.NOM.Trim() | @item.CODI_TRB">@item.NOM.Trim() | @item.CODI_TRB</option>
+                                                }
+                                            }                                       
+                                        </select>
+                                    </div>
+                                    <input id="inAsunto" type="text" class="form-control" placeholder="Asunto">
+                                    <textarea id="inMsg" class="form-control" rows="3"></textarea>
+                                    <button id="btnEnviarMsg" type="button" class="btn btn-default">Enviar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade in" id="messages">
+                            ...
+                        </div>
+                        <div class="tab-pane fade in" id="settings">
+                            <div class="list-group">
+                                <div class="list-group-item">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">@@</span>
+                                        <input type="text" class="form-control" placeholder="Administración" disabled="disabled">
+                                    </div>
+                                    <input id="inAsuntoAdmin" type="text" class="form-control" placeholder="Asunto">
+                                    <textarea id="inMsgAdmin" class="form-control" rows="3"></textarea>
+                                    <button id="btnEnviarMsgAdmin" type="button" class="btn btn-default">Enviar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Ad -->
+                    <div class="row-md-12">
+                        <div class="ad">
+                            <a href="http://www.original-soft.com" class="title">¡Versión en desarrollo! (v2017.6.30.1A)</a>
+                            <div>
+                                La versión actual se encuentra en fase exprimental.
+                            </div>
+                            <a href="http://www.original-soft.com" class="url">+ Información</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

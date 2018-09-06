@@ -1,0 +1,17 @@
+﻿@model  List<GamIntraStandard.Common.Archivos>
+@{ 
+    string nombre;
+}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            @foreach (var item in Model)
+            {
+                nombre = item.FileName.Split('.').First();
+                <div class="itemFile col-sm-3 col-md-3 col-lg-3">
+                    <a class="linkFile" href='@Url.Action("DescargarArchivo","Formacion", new { id = item.id, FileName = item.FileName, FilePath = item.FilePath })'><span class="titleFile">@nombre</span><span class="biggerIcons glyphicon glyphicon-file"></span></a>
+                </div>
+            }
+        </div>
+    </div>
+</div>

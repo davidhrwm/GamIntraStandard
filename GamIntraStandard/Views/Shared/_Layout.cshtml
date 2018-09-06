@@ -1,0 +1,587 @@
+﻿@using GamIntraCustomerVerification
+
+
+@{ 
+    Clients items = new Clients();
+    string[] colores = null;  
+    List<string> menus;
+    int ClientCode;
+}
+
+<style>
+
+    #footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+
+    .nav > li.dropdown.navbarDrop > a.dropdown-toggle {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    #loading {
+        text-align: center;
+        display:none;
+    }
+
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>@ViewBag.Title - GamIntraStandard (Layout: v1.0)</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/css")
+    
+    @Styles.Render("~/Content/fullcalendarcss")
+   
+   
+</head>
+<body>
+    <div class="container-fluid navb hidden-xs hidden-sm" data-pg-name="Container - NavBar" data-pg-collapsed>
+        <div class="row navtop" data-pg-name="Row">
+            <video id="video1" width="100%" autoplay="autoplay" loop>
+                <source src="https://s3.amazonaws.com/dittodc/Oslo.webm" type="video/mp4">
+                Your browser does not support HTML5 video.
+            </video>
+        </div>
+        <div class="navsub row" role="navigation">
+            <div class="logo">
+                <img src="~/assets/img/logo_client.png" />
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+
+               @{
+                   GamIntraCustomerVerification.Module.Verification info = null;
+                   using (var ent = new GamIntraStandard.Models.gamEntities1())
+                   {
+                       var cliente = ent.CFG.Select(x => x.CLIENT_OSOFT).FirstOrDefault();
+
+                       ClientCode = cliente == null ? 0 : Convert.ToInt32(cliente);
+
+                       menus = items.ConfigurationMenu(ClientCode);
+
+                       colores = items.ConfigClients(ClientCode);
+
+                       var _v = new GamIntraCustomerVerification.Clients();
+
+                       info = _v.MainVerification(ClientCode);
+
+                       if (info.MenuHome == true) {
+                        <li>
+                            <a href="@Url.Action("Index", "Home")">Inicio</a>
+                        </li>
+                       }
+                       if (info.MenuJornada == true)
+                       {
+                        <li>
+                            <a href="@Url.Action("Index", "Jornada")">Jornada</a>
+                        </li>
+                       }
+                       if (info.MenuFormacion == true)
+                       {
+                        <li>
+                            <a href="@Url.Action("Index", "Formacion")">Formacion</a>
+                        </li>
+                       }
+                       if (info.MenuDocumentos == true)
+                       {
+                        <li>
+                            <a href="@Url.Action("GeneralDocumentos", "MiPerfil")">Documentos</a>
+                        </li>
+                       }
+
+
+                   }
+            }
+                <li class="dropdown navbarDrop">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        
+                        <div style="height:24px;">
+                            <i class="material-icons pull-left">account_circle</i>
+                                Mi perfil
+                            <b class="caret"></b>
+                       </div>
+                      
+                    </a>
+                    <ul class="dropdown-menu">
+
+                        @{var res = items.ConfigurationPersonal(ClientCode);
+
+                            if ( info.MenuPerfil == true)
+                            {
+                                <li>
+                                    <a href="@Url.Action("VerDatosPersonales", "MiPerfil")">Ver datos personales</a>
+                                </li>
+
+                            }
+
+                            if (info.SubPerfilMisDocumentos == true)
+                            {
+                                <li>
+                                    <a href="@Url.Action("MisDocumentos", "MiPerfil")">Mis Documentos</a>
+                                </li>
+
+                            }
+                            <li>
+                                <a href="@Url.Action("CambiarPass", "MiPerfil")">Cambiar contraseña</a>
+                            </li>
+                        }
+
+                        <li class="divider"></li>
+                        <li>
+                            <a href="@Url.Action("salir","Service")">Cerrar sesión</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="content container-fluid" data-pg-name="Container - Body">
+        @RenderBody()
+    </div>
+    <div class="container menum hidden-md hidden-lg" data-pg-name="Container - Menum" data-pg-collapsed>
+        <div class="row">
+            <div id="cerrarmenu" class="pull-right col-sm-12 col-xs-12 text-right">
+                <i class="material-icons">close</i>
+            </div>
+        </div>
+        <div class="row" data-pg-collapsed>
+            <div class="col-md-4 col-sm-3 center-block">
+                <ul class="nav navbar-nav test">
+@{
+
+    if (info.MenuHome == true)
+    {
+        <li>
+            <a href="@Url.Action("Index", "Home")">Inicio</a>
+        </li>
+    }
+    if (info.MenuJornada == true)
+    {
+        <li>
+            <a href="@Url.Action("Index", "Jornada")">Jornada</a>
+        </li>
+    }
+    if (info.MenuFormacion == true)
+    {
+        <li>
+            <a href="@Url.Action("Index", "Formacion")">Formacion</a>
+        </li>
+    }
+    if (info.MenuDocumentos == true)
+    {
+        <li>
+            <a href="@Url.Action("GeneralDocumentos", "MiPerfil")">Documentos</a>
+        </li>
+    }
+}
+
+                    <li class="dropdown navbarDrop">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+
+                            <div style="height:24px;">
+                                <i class="material-icons pull-left">account_circle</i>
+
+                                Mi perfil
+
+                                <b class="caret"></b>
+                            </div>
+
+                        </a>
+                        <ul class="dropdown-menu menuResponsive">
+
+                            @{
+
+                                if (info.MenuPerfil == true)
+                                {
+                                    <li>
+                                        <a href="@Url.Action("VerDatosPersonales", "MiPerfil")">Ver datos personales</a>
+                                    </li>
+
+                                }
+
+                                if (info.SubPerfilMisDocumentos == true)
+                                {
+                                    <li>
+                                        <a href="@Url.Action("MisDocumentos", "MiPerfil")">Mis Documentos</a>
+                                    </li>
+
+                                }
+                                <li>
+                                    <a href="@Url.Action("CambiarPass", "MiPerfil")">Cambiar contraseña</a>
+                                </li>
+                            }
+
+                            <li class="divider"></li>
+                            <li>
+                                <a href="@Url.Action("salir","Service")">Cerrar sesión</a>
+                            </li>
+                        </ul>
+                        </li>
+</ul>
+            </div>
+        </div>
+    </div>
+    <div class="hidden-md hidden-lg navbm container-fluid" data-pg-name="Container -NavBarMobile" data-pg-collapsed>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div id="btnMenu" class="col-xs-2 col-sm-2">
+                    <i class="material-icons">menu</i>
+                </div>
+                <img width="290" src="~/assets/img/logo_client.png" />
+            </div>
+        </div>
+    </div>
+
+<!--
+        
+    MODAL        
+
+        -->
+
+
+    <div id="myModal" class="modal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 id="des" class="modal-title"></h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div id="content" class="containerText">
+                    </div>
+                </div>
+                <div id="modalPie" class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    @*<div class="fecha pull-left"></div>
+                    <div id="grpbtn" class="row btn-group">
+                        <button id="read" type="button" class="btn btn-info invisible">Marcar Leído</button>
+                    </div>*@
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/fullcalendarjs")
+    @RenderSection("scripts", required: false)  
+</body>
+</html>
+
+
+@using GamIntraStandard.Common
+@using Newtonsoft.Json
+@using System
+@using System.Collections
+
+<style>
+    .logo {
+        background-color: @info.Color1;
+
+    }
+    .navb {
+        background-color: @info.Color2;
+    }
+    .foot {
+        background-color: @info.Color2;
+    }
+    .navbm {
+        background-color: @info.Color2;
+    }
+</style>
+
+<script>
+
+    $(document).ready(function () {
+        $('#loading').hide();
+
+        cargarBuzon();
+        cargarAvisos();
+        cargarMensajes();
+        CambioTurnoPendiente();
+
+        function CambioTurnoPendiente() {
+
+            $.ajax({
+                type: 'POST',
+                url: "@Url.Action("CambioTurnosPendientes", "Service")",
+                success: function (data) {
+                        var re = /-?\d+/;
+                        var m = re.exec(data.DATA_ALTA);
+                        var d = new Date(parseInt(m[0]));
+                        var j = re.exec(data.DATA_PETICIO);
+                        var z = new Date(parseInt(j[0]));
+
+                        //console.log(data);
+
+                        var fechaAfectada = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear();
+
+                        var fechaCambio = z.getDate() + "-" + (z.getMonth() + 1) + "-" + z.getFullYear();
+
+                        var dades = data.DADES;
+                        var sys215 = data.SYS_215;
+                        $(".modal-header").html("<h2>Aceptar Cambio de Turno</h2>");
+                        $(".containerText").html("<div class='row'><div class='col-lg-12'><p>" + dades + "</p><p> Fecha a Substituir : <strong>" + fechaAfectada + "</strong></p> <p>Fecha substitución: <strong>" + fechaCambio + "</strong></p></div><div id='marcar' style='display:none'>" + sys215 + "</div><div id='loading'><p><img src='/img/loading.gif' /> Por favor Espere...</p></div></div>");
+                        $(".modal-footer").html("<div class='col-md-2 ,col-lg-2'><button id='aceptar' class='btn btn-info'>Aceptar</button></div><div class='col-md-2 ,col-lg-2'><button id='cancelar' class='btn btn-danger'>Cancelar</button></div><button type='button' class='btn btn-default' data-dismiss='modal'>Cerrar</button>");
+                        $("#cerrar").addClass("invisible");
+                        $('#myModal').modal('toggle');
+
+                        $(document).on("click", "#cancelar", function () {
+
+                            var id = $("#marcar").text();
+
+                            $.ajax({
+                                type:'POST',
+                                url: "@Url.Action("CancelarCambio", "Service")",
+                                data: { msgId: id },
+                                beforeSend: function () {
+                                    $('#loading').css("display", "inline");
+                                    $("#cancelar").prop("disabled", true);
+                                    $("#aceptar").prop("disabled", true);
+                                },
+                                success: function () {
+                                    $('#loading').css("display", "none");
+                                    window.location.href = "@Url.Action("Index","Home")";
+                                }
+                            });
+
+                        });
+
+                        $(document).on("click", "#aceptar", function () {
+
+                            var id = $("#marcar").text();
+
+                            $.ajax({
+                                type: 'POST',
+                                url: "@Url.Action("AceptarCambio", "Service")",
+                                data: { msgId: id },
+                                beforeSend: function () {
+                                    $('#loading').css("display", "inline");
+                                    $("#cancelar").prop("disabled", true);
+                                    $("#aceptar").prop("disabled", true);
+                                },
+                                success: function () {
+                                    $('#loading').css("display", "none");
+                                    window.location.href = "@Url.Action("Index","Home")";
+                                }
+                            });
+
+                        });
+
+                }
+            });
+        }
+
+
+        $('#myModal').on('hidden.bs.modal', function () {
+
+            var des = $("#des").text().trim();
+
+            if (des == "Petición Cambio de Turno")
+             {
+                location.reload();
+
+            }
+
+            $("#read").addClass('invisible');
+
+        });
+
+
+
+
+        var url2 = "@Url.Action("Avisos", "Service")";
+
+        $("#read").click(function () {
+
+            alert("hola");
+            var id = $("#marcar").text();
+
+            $.ajax({
+                type:'POST',
+                url: "@Url.Action("MarcarLeido", "Service")",
+                data:{ msg: id },
+                success: function () {
+
+                    $('#myModal').modal('toggle');
+                    location.reload();
+
+             }
+            });
+
+        });
+
+        $(document).on('click', '#openMsg', function (s, e) {
+            alert("adios");
+            $("#des").html("");
+            $(".fecha").html("");
+
+            var idMsg = $(this).children().html().toString();
+
+            if ($(this).hasClass('av') == false) {
+
+                $("#read").removeClass('invisible');
+
+                var url =  "@Url.Action("ModalMsg", "Service")";
+
+                if (idMsg != null) {
+
+                    $.getJSON(url, { id: idMsg }, function (data) {
+
+                        var re = /-?\d+/;
+                        var m = re.exec(data.DATA);
+                        var d = new Date(parseInt(m[0]));
+
+                        var month = d.getMonth() + 1;
+                        var fecha = d.getDate() + "/" + month + "/" + d.getFullYear() + "  " + d.getHours() + ":" + d.getMinutes();
+
+                        $("#des").html( data.DES );
+                        $(".containerText").html("<div class='row'>" + data.TEXTE + "</div> <div id='marcar' style='display:none'> " + data.SYS_215 + "</div>");
+                        $(".fecha").html(fecha);
+                    });
+                }
+
+            } else {
+
+                var url =  "@Url.Action("ModalAviso", "Service")";
+
+                if (idMsg != null) {
+
+                    $.getJSON(url, { id: idMsg }, function (data) {
+
+                        var re = /-?\d+/;
+                        var m = re.exec(data.DATA);
+                        var d = new Date(parseInt(m[0]));
+
+                        var month = d.getMonth() + 1;
+                        var fecha = d.getDate() + "/" + month + "/" + d.getFullYear() + "  " + d.getHours() + ":" + d.getMinutes();
+
+                        $("#des").html( data.DES );
+                        $(".containerText").html("<div class='row'>" + data.TEXTE + "</div> <div id='marcar' style='display:none'> " + data.SYS_215 + "</div>");
+                        $(".fecha").html(fecha);
+                    });
+
+                }
+            }
+        });
+    });
+
+    function cargarAvisos() {
+
+        var url = "@Url.Action("Avisos", "Service")";
+
+        $.getJSON(url, function (data) {
+
+            if (data.length == 0) {
+
+                $("#avin").append("<div class='row'><div id='msg' class='col-md-12 text-center'>No tiene avisos</div></div>")
+            }
+
+
+            for (var i = 0; i < data.length; i++) {
+
+                var re = /-?\d+/;
+                var m = re.exec(data[i].DATA);
+                var d = new Date(parseInt(m[0]));
+                var de = "";
+
+                var month = d.getMonth() + 1;
+                var fecha = d.getDate() + "/" + month + "/" + d.getFullYear();
+
+
+                $("#avin").append("<div id='msg' class='row'><div class='col-md-4'>Fecha: " + fecha + "</div><div class='col-md-8'> Asunto: " + data[i].DES + "<a id='openMsg' data-toggle='modal' data-target='#myModal' class='glyphicon glyphicon-envelope pull-right av'><div style='display: none'> " + data[i].SYS_215 + "</div></a> </div></div>");
+
+
+
+            }
+        });
+    }
+
+    function cargarMensajes() {
+
+        var url = "@Url.Action("Mensajes", "Service")";
+
+        $.getJSON(url, function (data) {
+
+
+            if (data.length == 0) {
+
+                $("#menin").append("<div class='row'><div id='msg' class='col-md-12 text-center'>No tiene mensajes</div></div>")
+            }
+
+            for (var i = 0; i < data.length; i++) {
+
+                var re = /-?\d+/;
+                var m = re.exec(data[i].DATA);
+                var d = new Date(parseInt(m[0]));
+                var de = "";
+
+                var month = d.getMonth() + 1;
+                var fecha = d.getDate() + "/" + month + "/" + d.getFullYear();
+
+
+                $("#menin").append("<div id='msg' class='row'><div class='col-md-3'>De: " + data[i].CODI_TRB_ORIGEN + "</div><div class='col-md-5'> Asunto: " + data[i].DES + "</div><div class='col-md-4'> Fecha: " + fecha + "<a id='openMsg' data-toggle='modal' data-target='#myModal' class='glyphicon glyphicon-envelope pull-right'><div style='display: none'> " + data[i].SYS_215 + "</div> </a></div></div>");
+
+
+            }
+
+        });
+    }
+
+    function cargarBuzon() {
+
+
+
+        var url = "@Url.Action("Buzon", "Service")";
+
+        $.getJSON(url, function (data) {
+
+
+            if (data.length == 0) {
+
+               $("#msgin").append("<div class='row'><div id='msg' class='col-md-12 text-center'>Su buzón está vacío</div></div>")
+            }
+
+            for (var i = 0; i < data.length; i++) {
+                var re = /-?\d+/;
+                var m = re.exec(data[i].DATA);
+                var d = new Date(parseInt(m[0]));
+                var de = "";
+
+                var month = d.getMonth() + 1;
+                var fecha = d.getDate() + "/" + month + "/" + d.getFullYear() + "  " + d.getHours() + ":" + d.getMinutes();
+
+                if (data[i].CODI_TRB_ORIGEN == null || data[i].CODI_TRB_ORIGEN == "")
+                {
+                    de = "Administracion";
+
+                } else {
+
+                    de = data[i].CODI_TRB_ORIGEN;
+
+                }
+
+
+                $("#msgin").append("<div id='msg' class='row'> <div class='col-md-12'><div class='col-md-3'> De: " + de + " </div><div class='col-md-5'> Asunto: " + data[i].DES + " </div><div class='col-md-4'> Fecha: " + fecha + " <a id='openMsg' data-toggle='modal' data-target='#myModal' class='glyphicon glyphicon-envelope pull-right'><div style='display: none'> " + data[i].SYS_215 + "</div> </a> </div></div></div>");
+
+            }
+
+        });
+    }
+
+</script>

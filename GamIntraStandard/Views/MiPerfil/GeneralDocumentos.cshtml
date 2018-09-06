@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "GeneralDocumentos";
+}
+
+@using GamIntraCustomerVerification
+
+@{
+
+    var ob = new GamIntraStandard.Clases.CMiPerfil();
+    var file = ob.DocumentosGenerales();
+
+}
+
+
+
+<div class="jornada-master">
+    <div style="margin-top:10px" class="formacion-render">
+        <div class="jornada-turno-master">
+            <div class="container" data-pg-collapsed>
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                        <div class="perfil-info-titulo text-center text-uppercase">
+                            <p>Documentos Generales</p>
+                        </div>
+                        <div class="perfil-info-contenido">
+                            <div class="row">
+                                <div class="col-md-9">
+
+
+                                    <span>Documentos en PDF</span>
+
+                                    <ul id="aqui">
+                                        @{
+                                            foreach (var item in file)
+                                            {
+                                                var url = Url.Action("DownloadFile", "MiPerfil", new { @carpeta = item.FilePath, @name = item.FileName, @id = item.id });
+                                                <li class="archivoLista"><a href="@url">@item.FileName.Split('.').First()<br/><span class="biggerIcons glyphicon glyphicon-file"></span></a></li>
+                                                @*<li class="archivoLista"><a href="/MiPerfil/DownloadFile/?url=@item.FilePath@item.FileName&name=@item.FileName">@item.FileName.Split('.').First()<br /><span class="biggerIcons glyphicon glyphicon-file"></span></a></li>*@
+                                            }
+                                        }
+
+                                    </ul>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+

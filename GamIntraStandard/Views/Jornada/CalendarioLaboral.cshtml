@@ -1,0 +1,231 @@
+﻿
+
+
+<script>
+
+    $(document).ready(function () {
+
+        var event1;
+        var event2;
+
+        $('#calendar').fullCalendar({
+            /*defaultDate: '2016-12-12',*/
+            editable: false,
+            eventLimit: true,
+            monthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            firstDay: 1,
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
+            buttonText: { today: 'Hoy', month: 'mes', week: 'semana', day: 'día' },
+            // allow "more" link when too many events
+
+            eventClick: function (calEvent, jsEvent, view) {
+
+                //console.log(calEvent);
+
+                $.ajax({
+                    type: 'POST',
+                    url: "@Url.Action("Horarios", "Jornada")",
+                    data: { dia: calEvent.id },
+                    beforeSend: function () {
+                        //console.log(calEvent.id);
+                    },
+                    success: function (data) {
+                        console.log(data);
+                      //var re = /-?\d+/;
+
+                      var inici = (data.DATA_INICI_REAL != null) ? new Date(data.DATA_INICI_REAL) : "";
+                      var final = (data.DATA_FINAL_REAL != null) ? new Date(data.DATA_INICI_REAL) : "";
+
+                      var iniciOr = (data.DATA_INICI_ORIGINAL != null) ? new Date(data.DATA_INICI_REAL) : "";
+                      var finalOr = (data.DATA_FINAL_ORIGINAL != null) ? new Date(data.DATA_INICI_REAL) : "";
+
+                      try {
+
+                          var inc = data.data_inici_original;
+                          var des = data.data_final_original;
+
+                          var inc2 = data.DATA_INICI_REAL;
+                          var des2 = data.DATA_FINAL_REAL;
+
+                      } catch (ex) {
+
+                          $(".containerText").html("<div class='row'>Las fechas no estan correctamente informadas </div>");
+
+                      }
+
+                      $(".modal-header").html("<strong>Horarios Teoricos y Reales</strong>");
+                      $(".containerText").html("<div class='row'><div class='col-md-6'> <strong>Inicio Original: </strong>" + inc + " </div><div class='col-md-6'> <strong>Final Original: </strong>" + des + " </div> </div><div class='row'><div class='col-md-6'><strong>Inicio Real: </strong>" + inc2 +"</div><div class='col-md-6'><strong>Final Real: </strong>"+ des2 +" </div></div>");
+
+                  }
+              });
+
+                $('#myModal').modal('show');
+
+              }
+        });
+
+            $(".fc-button").removeAttr("class").addClass("btn");
+
+            var date = new Date($.now());
+            var currentMonth = date.getMonth();
+            var fullYear = date.getFullYear();
+
+            loadDays(currentMonth, fullYear);
+
+            //Añade una id al botón default del framework fullCalendar, para poder recalcular el mes necesario
+            $(".fc-button-group button:first-child").attr('id', 'mesAnterior');
+            $(".fc-button-group button:nth-child(2)").attr('id', 'mesPosterior');
+
+            //Evento para calcular el calendario de meses anteriores
+        $("#mesAnterior").click(function () {
+                $("#calendar").fullCalendar('removeEvents'); //Elimina los eventos guardados. (para no replicar informacion)
+                currentMonth = currentMonth - 1;
+                loadMonth(currentMonth, fullYear);
+        });
+
+            //Evento para calcular el calendario de meses posteriores
+        $("#mesPosterior").click(function () {
+                $("#calendar").fullCalendar('removeEvents');  //Elimina los eventos guardados. (para no replicar informacion)
+                currentMonth = currentMonth + 1;
+                loadMonth(currentMonth, fullYear);
+        });
+    });
+
+    function loadDays(currentMonth, fullYear)
+    {
+
+          $.ajax({
+                type: "POST",
+                url: "@Url.Action("CalendarioLaboralEvents", "Jornada")",
+                data: { currentMonth: currentMonth, fullYear: fullYear },
+                beforeSend: function (data) {
+                    $('#cargando').css("display","block");
+                    //console.log(currentMonth + 1);
+                    //console.log(fullYear);
+                },
+                success: function (data) {
+                    console.log(data);
+                    for (var i = 0; i < data.length; i++)
+                    {
+                        //console.log(data.length);
+                        //console.log(data[i]);
+                        //var re = /-?\d+/;
+                        //var m = re.exec(data[i].data_inici);
+                        var d = new Date(data[i].data_inici);
+                        //console.log(d);
+
+                        event1 = { id: data[i].sys_215, title: data[i].des_tjo, allDay: true, start: d, color:  data[i].color, textColor: "black" }
+                        $("#calendar").fullCalendar('renderEvent', event1, true);
+
+                    }
+                    $('#cargando').css("display", "none");
+
+                },
+                error: function () {
+                    $('#cargando').css("display", "block");
+                }
+
+            });
+
+    }
+
+        function loadMonth(currentMonth, fullYear)
+        {
+
+             $.ajax({
+                type: "POST",
+                url: "@Url.Action("CalendarioLaboralEvents", "Jornada")",
+                data: { currentMonth: currentMonth, fullYear: fullYear },
+                beforeSend: function (data) {
+                    //$('#cargando').css("display","block");
+                },
+                success: function (data) {
+                    //console.log(data);
+                    for (var i = 0; i < data.length; i++)
+                    {
+                        //console.log(data.length);
+                        //console.log(data[i]);
+                        //var re = /-?\d+/;
+                        //var m = re.exec(data[i].data_inici);
+                        var d = new Date(data[i].data_inici);
+                        //console.log(d);
+
+                        event2 = { id: data[i].sys_215, title: data[i].des_tjo, allDay: true, start: d, color: data[i].color, textColor: "black" }
+
+                        $("#calendar").fullCalendar('renderEvent', event2, true); //Te renderiza el calendario con los datos de evento2.
+
+                    }
+                    $('#cargando').css("display", "none");
+                },
+                error: function () {
+                    $('#cargando').css("display", "block");
+                }
+            });
+        }
+
+</script>
+
+<style>
+
+    .fc-unthemed .fc-today {
+        border:3px solid;
+        border-color: red;
+        /*background-color: red;*/
+    }
+
+</style>
+
+<div style="jornada-calendar-master">
+    <!-- Version view 2017.2.16.1A -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-offsset-4 col-md-8 col-lg-8 col-sm-12 col-xs-12 center-block" id="calendar">
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="titulo"></h4>
+            </div>
+            <div id="cuerpo" class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+@*<div id="cargando" style="position:absolute; z-index:200; top:0px; left:0px; width:100%;height:100%; font-size:14px; display:none;">
+    <div class="bgcolorload">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="center-block">
+                    <img src="~/assets/img/load.gif" width="300" />
+                    <h2>Cargando...</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+
+<div id="cargando" style="display:none" class="bgcolorload">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="center-block">
+                <img src="~/assets/img/load.gif" width="300" />
+                <h2>Cargando...</h2>
+            </div>
+        </div>
+    </div>
+</div>
+

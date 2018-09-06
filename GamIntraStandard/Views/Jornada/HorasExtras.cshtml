@@ -1,0 +1,290 @@
+﻿@model GamIntraStandard.Common.HorasExtras
+
+<script>
+    $(document).ready(function () {
+
+        $("#footer").hide();
+
+        var days = new Array();
+
+        if ($("#numeroHoras").html() == "0H" || $("#numeroHoras").html() == "0") {
+
+            $("#addExtra").attr('disabled', 'disabled');
+        }
+
+
+        if (days.length < 1) {
+
+            $("#sendExtra").attr('disabled', 'disabled');
+        }
+
+
+
+        $("#bodyT").on('click', '.glyphicon.glyphicon-trash', function () {
+
+            var fila = $(this).closest('tr').find('td').eq(0).text();
+
+            days =  $.grep(days, function (e) { return e.id != fila });
+
+            $(this).closest('tr').remove();
+
+
+            if (days.length < 1) {
+
+                $("#sendExtra").attr('disabled', 'disabled');
+                var hola = "";
+            }
+                           
+        });
+
+
+        $("#DayEx").change(function () {
+            $(".glyphicon-hourglass").css("display", "inline");
+
+            $("#iOrig").val("");
+            $("#iReal").val("");
+            $("#fOrig").val("");
+            $("#fReal").val("");
+            //$("#DayEx").val("");
+            
+
+            var date = new String($("#DayEx").val());
+            
+            //salert(date);
+
+            function formatDate(stringDate) {
+
+                var dateString = stringDate;
+                var currentTime = new Date(parseInt(dateString));
+                var month = currentTime.getMonth() + 1;
+                var day = currentTime.getDate();
+                var year = currentTime.getFullYear();              
+                var date = (currentTime.getHours < 10 ? "0" + currentTime.getHours : currentTime.getHours()) + ":" + ((currentTime.getMinutes < 10 ? "0" + currentTime.getMinutes : currentTime.getMinutes()) == "0" ? "00" : ((currentTime.getMinutes < 10 ? "0" + currentTime.getMinutes : currentTime.getMinutes()))) + "H";
+
+
+                return date;
+            };
+
+            function substractDates(original, real) {
+
+                //console.log(parseInt(original));
+                //console.log(parseInt(real));
+
+                var fOr = new Date(parseInt(original));
+                var fRe = new Date(parseInt(real));
+
+                //console.log(fOr);
+                //console.log(fRe);
+
+                var result = fRe.getHours() - fOr.getHours();
+
+                console.log(fRe.getHours());
+                console.log(fOr.getHours());
+
+                console.log(result);
+
+                if (result < 0) {
+                    result = 0;
+                }
+
+               return result;
+
+            }
+           
+
+            function jsonDateToHours(jsonDate) {
+
+                var hs = new Date(parseInt(jsonDate));
+
+                console.log(hs)
+
+                var hora = hs.getHours() < 10 ? "0" + hs.getHours() : hs.getHours();
+                var minutos = hs.getMinutes() == 0 ? "00" : (hs.getMinutes() < 10 ? "0" + hs.getMinutes() : hs.getMinutes());
+
+                return hora + ":" + minutos + "H";
+            }
+            
+            $.ajax({
+                url: "@Url.Action("AddExtra","Jornada")",
+                contentType: "application/json; charset=utf-8",
+                data: { 'date': date },
+                type: 'GET',
+                cache: false,
+                success: function (result) {  
+                    
+                    console.log(result);
+                    $(".glyphicon-hourglass").css("display", "none");
+
+                    if (result != null) {
+
+                        $("#iOrig").val(formatDate(result.InicioT.substr(6)));
+                        $("#iReal").val(formatDate(result.InicioR.substr(6)));
+                        $("#fOrig").val(formatDate(result.FinalT.substr(6)));
+                        $("#fReal").val(formatDate(result.FinalR.substr(6)));
+
+                        var extra = substractDates(result.FinalT.substr(6), result.FinalR.substr(6));
+
+                        $("#numeroHoras").html();
+                        $("#numeroHoras").html(extra + "H");
+
+                        if (extra != 0) {
+
+                            $("#addExtra").removeAttr('disabled');
+                        }
+
+                    } else {
+
+                        alert("Sin horas extras para este día");
+
+                    }
+                }, error: function () {
+
+                    alert("Sin horas extras para este día"); 
+
+                    $(".glyphicon-hourglass").css("display", "none");
+
+
+                    //$("#addExtra").attr('disabled', 'disabled');
+                    
+                }
+            });
+
+
+        });
+
+        $("#addExtra").click(function (e) {
+
+            var dia = { id: days.length + 1, dia: $("#DayEx").val(), fOriginal: $("#fOrig").val(), fReal: $("#fReal").val(), extras: $("#numeroHoras").html() };
+
+            $("#bodyT").append("<tr><td>" + (days.length + 1) + "</td><td>" + $("#DayEx").val() + "</td><td>" + $("#fOrig").val() + "</td><td>" + $("#fReal").val() + "</td><td>" + $("#numeroHoras").html() + "</td><td><span class='glyphicon glyphicon-trash'></span></td></tr>");
+
+
+            days.push(dia);
+
+            if (days.length > 0) {
+
+                $("#sendExtra").removeAttr('disabled');
+            }
+            $("#iOrig").val("");
+            $("#iReal").val("");
+            $("#fOrig").val("");
+            $("#fReal").val("");
+            $("#DayEx").val("");
+
+        });
+
+    });
+
+</script>
+
+
+
+<div class="row" id="jornada-master-hora">
+    <div class="jornada-style">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                    <div class="perfil-info-titulo text-center text-uppercase">
+                        <p>Añadir Horas extras</p>
+                    </div>
+                    <div class="perfil-info-contenido">
+                        <div class="container-fluid">
+                            <div class="col-md-10">
+                                <div class="row">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="input-group jornada-separado">
+                                                <span class="input-group-addon"><span style="display:none" class="glyphicon glyphicon-hourglass"></span>Fecha</span>
+                                                <input id="DayEx" type="date" class="form-control" placeholder="Fecha">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="input-group jornada-separado">
+                                                <span class="input-group-addon">Inicio teorico</span>
+                                                @Html.TextBoxFor(x=> x.InicioOriginal, new { id = "iOrig" , @class="form-control", @placeholder="Inicio Original", @disabled= "disabled" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="input-group jornada-separado">
+                                                <span class="input-group-addon">Inicio real</span>
+                                                @Html.TextBoxFor(x => x.InicioReal, new { id = "iReal", @class = "form-control", @placeholder = "Inicio Real", @disabled = "disabled" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="input-group jornada-separado">
+                                                <span class="input-group-addon">Final teorico</span>
+                                                @Html.TextBoxFor(x => x.FinalOriginal, new { id = "fOrig", @class = "form-control", @placeholder = "Final Original", @disabled = "disabled" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="input-group jornada-separado">
+                                                <span class="input-group-addon">Final real</span>
+                                                @Html.TextBoxFor(x => x.FinalReal, new { id = "fReal", @class = "form-control", @placeholder = "Final Real", @disabled = "disabled" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="input-group jornada-separado">
+                                                <span class="input-group-addon">Oservaciones</span>
+                                                @Html.TextAreaFor(x => x.Observaciones, new { @class = "form-control", @placeholder = "Observaciones"})
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-offset-2 cold-md-6">
+                                            <div class="col-md-2">
+                                                <button id="addExtra" type="button" class="btn btn-default">Añadir</button>
+                                            </div>
+                                            <div class="col-md-offset-1 col-md-2">
+                                                <button id="sendExtra" type="button" class="btn btn-default">Enviar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2 jornada-horasex">
+                                <h3 id="numeroHoras" class="text-center">0</h3>
+                                <p class="text-center">Extras</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                    <div class="perfil-info-titulo text-center text-uppercase">
+                        <p>Horas extras agregadas</p>
+                    </div>
+                    <div class="perfil-info-contenido">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Dia</th>
+                                        <th>Final Teorico</th>
+                                        <th>Final Real</th>
+                                        <th>H.Extras</th>
+                                        <th></th>
+                                     
+                                    </tr>
+                                </thead>
+                                <tbody id="bodyT">                                  
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   
+</div>

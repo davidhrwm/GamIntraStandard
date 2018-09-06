@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@using GamIntraCustomerVerification
+
+
+@{
+    Clients items = new Clients();
+    int ClientCode;
+
+}
+
+<script>
+    $(document).ready(function () {
+
+        var fecha = new Date();
+
+
+        $.ajax({
+            type: 'POST',
+            url: "@Url.Action("MisCursos", "Formacion")",
+            data: { date: fecha.getFullYear() },
+            success: function (data) {
+                $(".formacion-render").html(data);
+            },
+        });
+
+        $("#prox").click(function () {
+
+             $.ajax({
+                type: 'POST',
+                url: "@Url.Action("ProximosCursos", "Formacion")",
+                success: function (data) {
+                    $(".formacion-render").html(data);
+                },
+            });
+
+
+        });
+
+        $("#cursos").click(function () {
+
+             $.ajax({
+                type: 'POST',
+                url: "@Url.Action("MisCursos", "Formacion")",
+                success: function (data) {
+                    $(".formacion-render").html(data);
+                },
+            });
+
+
+        });
+
+        $("#descargas").click(function () {
+            $.ajax({
+            type: 'POST',
+            url: "@Url.Action("Descargas", "Formacion")",
+            success: function (data) {
+                /*console.log(data);
+                alert("hola");*/
+                $(".formacion-render").html(data);
+
+            }
+            });
+        });
+    });
+
+
+</script>
+
+<div class="jornada-master">
+    <div class="container-fluid jornada-master-botonera">
+        <div class="row">
+            <div id="nav1" class="col-md-12 col-lg-12">
+                <ul class="nav navbar-nav jornada-nav">
+                    @{
+                        GamIntraCustomerVerification.Module.Verification info = null;
+                        using (var ent = new GamIntraStandard.Models.gamEntities1())
+                        {
+                            var cliente = ent.CFG.Select(x => x.CLIENT_OSOFT).FirstOrDefault();
+
+                            ClientCode = cliente == null ? 0 : Convert.ToInt32(cliente);
+
+                            var _v = new GamIntraCustomerVerification.Clients();
+
+                            info = _v.MainVerification(ClientCode);
+
+                            if (info.SubFormacionMisCursos == true)
+                            {
+                                <li id="btn-jornada-calendario">
+                                    <a id="cursos" href="#">Mis Cursos</a>
+                                </li>
+                            }
+                            if (info.SubFormacionProximosCursos == true)
+                            {
+                                <li id="btn-jornada-calendario">
+                                    <a id="prox" href="#">Próximos Cursos</a>
+                                </li>
+                            }
+
+                        }
+                    }
+                    
+                    <li id="btn-jornada-calendario">
+                        <a id="descargas" href="#">Descargas</a>
+                    </li>             
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top:10px" class="formacion-render">
+    </div>
+</div>
+

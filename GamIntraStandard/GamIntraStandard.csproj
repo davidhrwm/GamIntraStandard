@@ -1,0 +1,1246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F6D2D619-8351-4293-B9B0-CC6703206E8E}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GamIntraStandard</RootNamespace>
+    <AssemblyName>GamIntraStandard</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnitsNet, Version=3.36.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UnitsNet.3.36.0\lib\net35\UnitsNet.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Statup.Auth.cs" />
+    <Compile Include="Clases\CFormacion.cs" />
+    <Compile Include="Clases\CHome.cs" />
+    <Compile Include="Clases\CJornada.cs" />
+    <Compile Include="Clases\CLogin.cs" />
+    <Compile Include="Clases\CMiPerfil.cs" />
+    <Compile Include="Clases\CService.cs" />
+    <Compile Include="Common\Archivos.cs" />
+    <Compile Include="Common\Buzon.cs" />
+    <Compile Include="Common\CambioPass.cs" />
+    <Compile Include="Common\CambioTurno.cs" />
+    <Compile Include="Common\Correo.cs" />
+    <Compile Include="Common\Directorio.cs" />
+    <Compile Include="Common\Edit.cs" />
+    <Compile Include="Common\HorarioJornada.cs" />
+    <Compile Include="Common\HorasExtras.cs" />
+    <Compile Include="Common\InfoHorarioJornada.cs" />
+    <Compile Include="Common\MensajeTrabajadores.cs" />
+    <Compile Include="Common\MisCursos.cs" />
+    <Compile Include="Common\Ruta.cs" />
+    <Compile Include="Common\User.cs" />
+    <Compile Include="Controllers\FormacionController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JornadaController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MiPerfilController.cs" />
+    <Compile Include="Controllers\ServiceController.cs" />
+    <Compile Include="Controllers\TramitesController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaces\IFormacion.cs" />
+    <Compile Include="Interfaces\IHome.cs" />
+    <Compile Include="Interfaces\IJornada.cs" />
+    <Compile Include="Interfaces\ILogin.cs" />
+    <Compile Include="Interfaces\IMiPerfil.cs" />
+    <Compile Include="Interfaces\IService.cs" />
+    <Compile Include="Models\AGE.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AGR.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ALC.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ALC_LIN.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ALP.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ALP_LIN.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ANU.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ATR.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ATU.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AUT.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AUT_LIN.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AVI.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BAN.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BAS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CAA.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CAI.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CAI_HIS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CAL.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CAP.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CAT.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CAT_SAL.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CCO.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CFG.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CHK.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CHK_DES.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CLA.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\COC.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\COC_LIN.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\COM.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\COP.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\COP_LIN.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CPT.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAC.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAC_HIS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAT.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAT_APA.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAT_ATU.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAT_BEN.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAT_BUS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAT_DES.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAT_MIS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAT_SRV.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAT_TOR.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DEL_HIS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DEP.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DES.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DEV.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DIA.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DIG.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DIG_EXTERN.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DIR.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DIR_EXTERN.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DIS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DIS_DOC.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DIS_HIS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DPA.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DST.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ECO.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EMP.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EQU.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ESP.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EXT.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FAM.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FAP.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FAP_LIN.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FAP_REC.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FCT.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FCT_REC.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FDI.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FEE.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FEE_PRE.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FEE_TRB.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FIS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FOM.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FPA.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FTE.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\gam.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>gam.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GAM.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\gam.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>gam.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\gam1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GRP.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HIS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HIS_PRG.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\hola.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HOS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\INC.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\INF.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\INF_TRB.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\INT.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LAS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LLI_HIS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LOG_SCS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LOT.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LOT_HIS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LPD.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MAG.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MAS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MAT.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MAT_DOC.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MAT_MAG.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MET.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MOD_FCT.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MOD_PAC.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MOD_PRG.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MOD_SRV.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MOD_TRB.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MOD_VHI.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MOT.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MUL.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MUL_DOC.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MUL_HIS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MVH.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NOC.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NUHSA.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OTR.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OTR_LIN.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PAC.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PAC_DOC.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PAQ.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PAR.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PAT.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PATH_SCANNER.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PDA.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PLA.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PLL.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PLL_MES.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PLL_VHI.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\POB.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\POB_CP.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\POB_EXTERN.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PON.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PRC.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PRG.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PRG_DOC.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PRG_HIS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PRG_INC.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PRO.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PRO_HIS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PRV.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QUA.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QUA_BIS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QUA_INC.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RCL.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RCL_DOC.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RCL_HIS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RCU.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\REC.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\REC_CP.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\REG.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\REG_DIA.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\REG_MAG.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\REV.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RUT.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RUT_CP.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RUT_OBS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SCC.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SCS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SEC.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SIG.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SIN.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SMS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SQL.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SRV.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SRV_ASS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SRV_DOC.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SRV_GPS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SRV_INC.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SRV_OBS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SUA.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SYS_CON.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SYS_LLI.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SYS_MEN.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SYS_TER.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SYS_TRA.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TAR.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TAR_DST.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TCO.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TEL_HIS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TFC.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TJO.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TLL.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TLO.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TMA.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TOR.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TOT.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TPR.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TRA.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TRA_EXTERN.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TRB.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TRB_ATR.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TRB_CTR.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TRB_DOC.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TRB_FOR.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TRB_HIS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TRB_HUE.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TRB_INC.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TRB_PLL.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TRB_VAC.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TRB_VES.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TRM.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TSNUX.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TVH.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UP.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UP_ESP.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\USU.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\USU_DEF.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\USU_EMP.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\USU_EXE.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\USU_FIL.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\USU_HIS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\USU_LLI.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\USU_MEN.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\USU_PIC.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\USU_POS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\USU_TAU.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VHI.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VHI_CHK.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VHI_DOC.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VHI_GPS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VHI_HIS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VHI_INC.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VHI_REV.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VHI_SIN.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VHI_SIN_DOC.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VHI_SIN_HIS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VIP.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VIP_HIS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WEB_HIS.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ZON.cs">
+      <DependentUpon>gam.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\bootstrap\css\bootstrap-theme.css" />
+    <Content Include="assets\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="assets\bootstrap\css\bootstrap.css" />
+    <Content Include="assets\bootstrap\css\bootstrap.min.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485424291.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485424307.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485426592.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485428072.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485428075.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485428586.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485428953.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485429008.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485429028.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485429112.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485429261.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485429497.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485429500.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485429544.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485429606.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485429640.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485429665.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485430175.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485431148.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485431369.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485431389.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485431517.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485431706.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485431766.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485431773.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485431776.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485431827.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485432076.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485853176.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485853229.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485853246.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485853314.css" />
+    <Content Include="assets\bootstrap\css\_pgbackup\bootstrap_1485853406.css" />
+    <Content Include="assets\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="assets\bootstrap\js\bootstrap.js" />
+    <Content Include="assets\bootstrap\js\bootstrap.min.js" />
+    <Content Include="assets\bootstrap\js\npm.js" />
+    <Content Include="assets\img\lgo-originalsoft-foot.png" />
+    <Content Include="assets\img\load.gif" />
+    <Content Include="assets\img\logo_client.png" />
+    <Content Include="assets\img\meteo\a-bolt-and-a-cloud.svg" />
+    <Content Include="assets\img\meteo\cold.svg" />
+    <Content Include="assets\img\meteo\raindrops-falling-of-a-black-cloud.svg" />
+    <Content Include="assets\img\meteo\rainy-day.svg" />
+    <Content Include="assets\img\meteo\snow.svg" />
+    <Content Include="assets\img\meteo\sun-and-cloud.svg" />
+    <Content Include="assets\img\profile.gif" />
+    <Content Include="assets\js\holder.js" />
+    <Content Include="assets\js\holder.min.js" />
+    <Content Include="assets\js\ie-emulation-modes-warning.js" />
+    <Content Include="assets\js\ie10-viewport-bug-workaround.js" />
+    <Content Include="assets\js\jquery.min.js" />
+    <Content Include="assets\js\main.js" />
+    <Content Include="assets\js\velocity.min.js" />
+    <Content Include="assets\js\_pgbackup\main_1485775475.js" />
+    <Content Include="assets\js\_pgbackup\main_1485775504.js" />
+    <Content Include="assets\js\_pgbackup\main_1485775534.js" />
+    <Content Include="assets\js\_pgbackup\main_1485777724.js" />
+    <Content Include="assets\style.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\fullcalendar.css" />
+    <Content Include="Content\fullcalendar.min.css" />
+    <Content Include="Content\fullcalendar.print.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="img\loading.gif" />
+    <Content Include="Models\gam.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>gam.edmx</DependentUpon>
+      <LastGenOutput>gam.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\gam.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>gam.edmx</DependentUpon>
+      <LastGenOutput>gam1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="assets\bootstrap\css\bootstrap-theme.css.map" />
+    <Content Include="assets\bootstrap\css\bootstrap-theme.min.css.map" />
+    <Content Include="assets\bootstrap\css\bootstrap.css.map" />
+    <Content Include="assets\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="assets\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="assets\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="assets\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="assets\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="assets\font\font.woff" />
+    <Content Include="assets\font\fontlite.woff" />
+    <Content Include="ClassDiagram1.cd" />
+    <Content Include="assets\edit.json" />
+    <EntityDeploy Include="Models\gam.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>gam.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\gam.edmx.diagram">
+      <DependentUpon>gam.edmx</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\des.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\fullcalendar.js" />
+    <Content Include="Scripts\fullcalendar.min.js" />
+    <Content Include="Scripts\gcal.js" />
+    <Content Include="Scripts\jquery-3.1.1.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.1.1.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.8.11.js" />
+    <Content Include="Scripts\jquery-ui-1.8.11.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\lib\cupertino\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
+    <Content Include="Scripts\lib\cupertino\images\ui-bg_glass_100_e4f1fb_1x400.png" />
+    <Content Include="Scripts\lib\cupertino\images\ui-bg_glass_50_3baae3_1x400.png" />
+    <Content Include="Scripts\lib\cupertino\images\ui-bg_glass_80_d7ebf9_1x400.png" />
+    <Content Include="Scripts\lib\cupertino\images\ui-bg_highlight-hard_100_f2f5f7_1x100.png" />
+    <Content Include="Scripts\lib\cupertino\images\ui-bg_highlight-hard_70_000000_1x100.png" />
+    <Content Include="Scripts\lib\cupertino\images\ui-bg_highlight-soft_100_deedf7_1x100.png" />
+    <Content Include="Scripts\lib\cupertino\images\ui-bg_highlight-soft_25_ffef8f_1x100.png" />
+    <Content Include="Scripts\lib\cupertino\images\ui-icons_2694e8_256x240.png" />
+    <Content Include="Scripts\lib\cupertino\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Scripts\lib\cupertino\images\ui-icons_3d80b3_256x240.png" />
+    <Content Include="Scripts\lib\cupertino\images\ui-icons_72a7cf_256x240.png" />
+    <Content Include="Scripts\lib\cupertino\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Scripts\lib\cupertino\jquery-ui.min.css" />
+    <Content Include="Scripts\lib\jquery-ui.min.js" />
+    <Content Include="Scripts\lib\jquery.min.js" />
+    <Content Include="Scripts\lib\moment.min.js" />
+    <Content Include="Scripts\locale-all.js" />
+    <Content Include="Scripts\locale\ar-ma.js" />
+    <Content Include="Scripts\locale\ar-sa.js" />
+    <Content Include="Scripts\locale\ar-tn.js" />
+    <Content Include="Scripts\locale\ar.js" />
+    <Content Include="Scripts\locale\bg.js" />
+    <Content Include="Scripts\locale\ca.js" />
+    <Content Include="Scripts\locale\cs.js" />
+    <Content Include="Scripts\locale\da.js" />
+    <Content Include="Scripts\locale\de-at.js" />
+    <Content Include="Scripts\locale\de.js" />
+    <Content Include="Scripts\locale\el.js" />
+    <Content Include="Scripts\locale\en-au.js" />
+    <Content Include="Scripts\locale\en-ca.js" />
+    <Content Include="Scripts\locale\en-gb.js" />
+    <Content Include="Scripts\locale\en-ie.js" />
+    <Content Include="Scripts\locale\en-nz.js" />
+    <Content Include="Scripts\locale\es-do.js" />
+    <Content Include="Scripts\locale\es.js" />
+    <Content Include="Scripts\locale\eu.js" />
+    <Content Include="Scripts\locale\fa.js" />
+    <Content Include="Scripts\locale\fi.js" />
+    <Content Include="Scripts\locale\fr-ca.js" />
+    <Content Include="Scripts\locale\fr-ch.js" />
+    <Content Include="Scripts\locale\fr.js" />
+    <Content Include="Scripts\locale\gl.js" />
+    <Content Include="Scripts\locale\he.js" />
+    <Content Include="Scripts\locale\hi.js" />
+    <Content Include="Scripts\locale\hr.js" />
+    <Content Include="Scripts\locale\hu.js" />
+    <Content Include="Scripts\locale\id.js" />
+    <Content Include="Scripts\locale\is.js" />
+    <Content Include="Scripts\locale\it.js" />
+    <Content Include="Scripts\locale\ja.js" />
+    <Content Include="Scripts\locale\ko.js" />
+    <Content Include="Scripts\locale\lb.js" />
+    <Content Include="Scripts\locale\lt.js" />
+    <Content Include="Scripts\locale\lv.js" />
+    <Content Include="Scripts\locale\mk.js" />
+    <Content Include="Scripts\locale\ms-my.js" />
+    <Content Include="Scripts\locale\ms.js" />
+    <Content Include="Scripts\locale\nb.js" />
+    <Content Include="Scripts\locale\nl.js" />
+    <Content Include="Scripts\locale\nn.js" />
+    <Content Include="Scripts\locale\pl.js" />
+    <Content Include="Scripts\locale\pt-br.js" />
+    <Content Include="Scripts\locale\pt.js" />
+    <Content Include="Scripts\locale\ro.js" />
+    <Content Include="Scripts\locale\ru.js" />
+    <Content Include="Scripts\locale\sk.js" />
+    <Content Include="Scripts\locale\sl.js" />
+    <Content Include="Scripts\locale\sr-cyrl.js" />
+    <Content Include="Scripts\locale\sr.js" />
+    <Content Include="Scripts\locale\sv.js" />
+    <Content Include="Scripts\locale\th.js" />
+    <Content Include="Scripts\locale\tr.js" />
+    <Content Include="Scripts\locale\uk.js" />
+    <Content Include="Scripts\locale\vi.js" />
+    <Content Include="Scripts\locale\zh-cn.js" />
+    <Content Include="Scripts\locale\zh-tw.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\MiPerfil\VerDatosPersonales.cshtml" />
+    <Content Include="Views\Jornada\Index.cshtml" />
+    <Content Include="Views\Jornada\CalendarioLaboral.cshtml" />
+    <Content Include="Views\Login\GoMenu.cshtml" />
+    <Content Include="Views\Jornada\CambioTurno.cshtml" />
+    <Content Include="Views\Jornada\HorasExtras.cshtml" />
+    <Content Include="Views\MiPerfil\CambiarPass.cshtml" />
+    <Content Include="Views\Formacion\Index.cshtml" />
+    <Content Include="Views\Formacion\MisCursos.cshtml" />
+    <Content Include="Views\Formacion\ProximosCursos.cshtml" />
+    <Content Include="Views\MiPerfil\MisDocumentos.cshtml" />
+    <Content Include="Views\MiPerfil\Nominas.cshtml" />
+    <Content Include="Views\MiPerfil\DatosPersonales.cshtml" />
+    <Content Include="Views\MiPerfil\GeneralDocumentos.cshtml" />
+    <Content Include="Views\Formacion\Descargas.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Views\Service\" />
+    <Folder Include="Views\Tramites\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GamIntraCustomerVerification\GamIntraCustomerVerification.csproj">
+      <Project>{d88e015a-4ba1-4ac6-9195-acd71a685e10}</Project>
+      <Name>GamIntraCustomerVerification</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>62044</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:62044/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>
